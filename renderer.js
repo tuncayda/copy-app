@@ -4,6 +4,18 @@ const state = {
   endDate: ''
 };
 
+(async () => {
+  try {
+    const lastDir = await window.electron.getLastDirectory();
+    if (lastDir) {
+      state.sourcePath = lastDir;
+      document.getElementById('selected-folder').innerText = lastDir;
+    }
+  } catch (error) {
+    console.error('Error retrieving last directory:', error);
+  }
+})();
+
 document.getElementById('select-folder').addEventListener('click', async () => {
   const folderPath = await window.electron.openFolder();
   if (folderPath) {

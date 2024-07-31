@@ -4,26 +4,16 @@ const fs = require('fs');
 const fsp = fs.promises;
 const os = require('os');
 
-function saveLastUsedDirectory(directory) {
+async function saveLastUsedDirectory(directory) {
   try {
     fs.writeFile('lastDirectory.txt', directory, err => {
-      if(err) console.log(err);
+      if (err) {
+        console.log(err);
+      }
     });
-    console.log(`Directory saved: ${directory}`);
   } catch (err) {
     console.error('Error saving last used directory:', err);
   }
-}
-
-function getLastUsedDirectory() {
-  try {
-    if (fs.existsSync(lastDirFile)) {
-      return fs.readFileSync(lastDirFile, 'utf8').trim();
-    }
-  } catch (err) {
-    console.error('Error reading last used directory:', err);
-  }
-  return path.join(__dirname, 'Photos'); // Default path
 }
 
 function createWindow() {
@@ -52,6 +42,17 @@ app.whenReady().then(() => {
     saveLastUsedDirectory(selectedDir);
 
     return selectedDir;
+  });
+
+  ipcMain.handle('get-last-directory', () => {
+    try {
+      if (fs.existsSync('lastDirectory.txt')) {
+        return fs.readFileSync('lastDirectory.txt', 'utf8').trim();
+      }
+    } catch (err) {
+      console.error('Error reading last directory:', err);
+    }
+    return null; // Return null if there's no file or an error occurs
   });
 
   ipcMain.handle('files:copyJpg', async (event, sourcePath, startDate, endDate) => {
