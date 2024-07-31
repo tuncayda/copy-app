@@ -4,6 +4,14 @@ const state = {
   endDate: ''
 };
 
+// Function to set today's date as the default value
+function setTodayDate() {
+  const today = new Date().toISOString().split('T')[0]; // Gets today's date in yyyy-mm-dd format
+  document.getElementById('start-date').value = today;
+  document.getElementById('end-date').value = today;
+}
+
+// Init the last directory and set todays date
 (async () => {
   try {
     const lastDir = await window.electron.getLastDirectory();
@@ -11,6 +19,7 @@ const state = {
       state.sourcePath = lastDir;
       document.getElementById('selected-folder').innerText = lastDir;
     }
+    setTodayDate();
   } catch (error) {
     console.error('Error retrieving last directory:', error);
   }
