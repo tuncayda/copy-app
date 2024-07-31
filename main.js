@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
-const fsp = fs.promises; // Promisified version of fs for async/await
+const fsp = fs.promises;
 const os = require('os');
 
 function createWindow() {
@@ -29,21 +29,27 @@ app.whenReady().then(() => {
     return result.filePaths[0];
   });
 
-  ipcMain.handle('files:copyJpg', async (event, sourcePath) => {
+  ipcMain.handle('files:copyJpg', async (event, sourcePath, startDate, endDate) => {
     try {
-      // Create target folder on the desktop with today's date
-      const today = new Date().toISOString().split('T')[0]; // Format yyyy-mm-dd
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      const today = new Date().toISOString().split('T')[0];
       const desktopPath = path.join(os.homedir(), 'Desktop');
       const targetFolder = path.join(desktopPath, today);
       await fsp.mkdir(targetFolder, { recursive: true });
 
-      // Read source folder and copy .jpg files
       const files = await fsp.readdir(sourcePath);
       for (const file of files) {
         if (path.extname(file).toLowerCase() === '.jpg') {
           const sourceFile = path.join(sourcePath, file);
-          const targetFile = path.join(targetFolder, file);
-          await fsp.copyFile(sourceFile, targetFile);
+          const stats = await fsp.stat(sourceFile);
+          const fileModifiedDate = new Date(stats.mtime);
+
+          if (fileModifiedDate >= start && fileModifiedDate <= end) {
+            const targetFile = path.join(targetFolder, file);
+            await fsp.copyFile(sourceFile, targetFile);
+          }
         }
       }
 

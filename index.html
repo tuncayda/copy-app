@@ -16,7 +16,20 @@
   </head>
   <body>
     <h1>Copy photos</h1>
-    <button type="button" id="selectFolder">Select folder</button>
-    <script src="render.js"></script>
+
+    <button type="button" id="select-folder">Select folder</button>
+    <span id="selected-folder"></span>
+    <br><br>
+
+    <label for="start-date">From</label>
+    <input type="date" id="start-date">
+    
+    <label for="end-date">To</label>
+    <input type="date" id="end-date">
+    <br><br>
+
+    <button type="button" id="copy-files">Copy</button>
+    
+    <script src="renderer.js"></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electron', {
-  openFolderDialog: () => ipcRenderer.invoke('dialog:openFolder'),
-  copyJpgFiles: (sourcePath) => ipcRenderer.invoke('files:copyJpg', sourcePath)
+  openFolder: () => ipcRenderer.invoke('dialog:openFolder'),
+  copyJpgFiles: (sourcePath, startDate, endDate) => ipcRenderer.invoke('files:copyJpg', sourcePath, startDate, endDate),
 });
