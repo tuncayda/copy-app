@@ -12,18 +12,6 @@ async function saveLastUsedDirectory(directory) {
   }
 }
 
-// async function saveLastUsedDirectory(directory) {
-//   try {
-//     fs.writeFile('lastDirectory.txt', directory, err => {
-//       if (err) {
-//         console.log(err);
-//       }
-//     });
-//   } catch (err) {
-//     console.error('Error saving last used directory:', err);
-//   }
-// }
-
 function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 500,

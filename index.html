@@ -15,21 +15,23 @@
     <title>Copy App</title>
   </head>
   <body>
-    <div class="header">
-      <h1>Copy photos</h1>
-    </div>
-
     <div class="main">
-      <button type="button" id="select-folder">Select folder</button>
-      <span id="selected-folder"></span>
-      <br><br>
+      <div class="select-folder-container">
+        <div class="copy-photos">
+          <span>Copy photos</span>
+          <button type="button" id="select-folder">Select folder</button>
+        </div>
+        <div class="selected-folder-container">
+          <span class="selected-folder" id="selected-folder"></span>
+        </div>
+      </div>
   
       <div class="date-from-and-to">
-        <div>
+        <div class="start-date">
           <label for="start-date">From</label>
           <input type="date" id="start-date">
         </div>
-        <div>
+        <div class="end-date">
           <label for="end-date">To</label>
           <input type="date" id="end-date">
         </div>
