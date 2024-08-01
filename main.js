@@ -18,8 +18,8 @@ async function saveLastUsedDirectory(directory) {
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 500,
+    height: 400,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
@@ -66,18 +66,24 @@ app.whenReady().then(() => {
       await fsp.mkdir(targetFolder, { recursive: true });
 
       const files = await fsp.readdir(sourcePath);
+      let nrOfFilesCopied = 0;
       for (const file of files) {
         if (path.extname(file).toLowerCase() === '.jpg') {
           const sourceFile = path.join(sourcePath, file);
           const stats = await fsp.stat(sourceFile);
           const fileModifiedDate = new Date(stats.mtime);
-
           if (fileModifiedDate >= start && fileModifiedDate <= end) {
             const targetFile = path.join(targetFolder, file);
             await fsp.copyFile(sourceFile, targetFile);
+            nrOfFilesCopied++;
+            // Send progress update
+            event.sender.send('copy-progress');
           }
         }
       }
+      event.sender.send('copy-progress-finished', {
+        nrOfFilesCopied
+      });
 
       return { success: true, message: 'Files copied successfully!' };
     } catch (error) {
