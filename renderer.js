@@ -27,15 +27,21 @@ function setTodayDate() {
 
 // Progress indicator
 document.addEventListener('DOMContentLoaded', () => {
+  const progressContainer = document.getElementById('progress-container');
   const progressText = document.getElementById('progress-text');
+  const loader = document.getElementById('loader');
   // Copying started
   window.electron.on('copy-progress', () => {    
-    progressText.textContent = `Copying file...`;
+    progressContainer.style.display = 'block';
+    loader.style.display = 'block';
+    progressText.textContent = `Copying files`;
   });
   
   // Copying finished
-  window.electron.on('copy-progress-finished', (nrOfFilesCopied) => {    
-    progressText.textContent = `Copied ${nrOfFilesCopied} files`;
+  window.electron.on('copy-progress-finished', (data) => {    
+    const { files, destinationFolder } = data;
+    progressText.innerText = `Copied ${files} files`;
+    document.getElementById('loader').style.display = 'none';
   });
 });
 

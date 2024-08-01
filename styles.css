@@ -126,3 +126,37 @@ input, button {
     border: 1px solid #2e2f30;
 }
     */
+
+#progress-container {
+    display: none;
+}
+
+#progress-container > div {
+    display: flex;
+    align-items: center;
+}
+
+#progress-container > div > *:first-child {
+    margin-right: 12px;
+}
+
+#loader {
+    border: 8px solid #d5d5d5;
+    border-radius: 50%;
+    border-top: 8px solid #2d2d2d;
+    width: 14px;
+    height: 14px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+
+  /* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

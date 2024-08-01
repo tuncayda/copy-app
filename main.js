@@ -66,7 +66,7 @@ app.whenReady().then(() => {
       await fsp.mkdir(targetFolder, { recursive: true });
 
       const files = await fsp.readdir(sourcePath);
-      let nrOfFilesCopied = 0;
+      let numberOfFilesCopied = 0;
       for (const file of files) {
         if (path.extname(file).toLowerCase() === '.jpg') {
           const sourceFile = path.join(sourcePath, file);
@@ -75,16 +75,15 @@ app.whenReady().then(() => {
           if (fileModifiedDate >= start && fileModifiedDate <= end) {
             const targetFile = path.join(targetFolder, file);
             await fsp.copyFile(sourceFile, targetFile);
-            nrOfFilesCopied++;
+            numberOfFilesCopied++;
             // Send progress update
             event.sender.send('copy-progress');
           }
         }
       }
       event.sender.send('copy-progress-finished', {
-        nrOfFilesCopied
+        files: numberOfFilesCopied
       });
-
       return { success: true, message: 'Files copied successfully!' };
     } catch (error) {
       console.error('Error copying files:', error);
