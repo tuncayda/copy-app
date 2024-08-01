@@ -1,52 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="styles.css">
-    <meta charset="UTF-8" />
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-    <meta
-      http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-    <title>Copy App</title>
-  </head>
-  <body>
-    <div class="main">
-      <div class="select-folder-container">
-        <div class="copy-photos">
-          <span>Copy photos</span>
-          <button type="button" id="select-folder">Select folder</button>
-        </div>
-        <div class="selected-folder-container">
-          <span class="selected-folder" id="selected-folder"></span>
-        </div>
-      </div>
-  
-      <div class="date-from-and-to">
-        <div class="start-date">
-          <label for="start-date">From</label>
-          <input type="date" id="start-date">
-        </div>
-        <div class="end-date">
-          <label for="end-date">To</label>
-          <input type="date" id="end-date">
-        </div>
-      </div>
-      
-      <button type="button" id="copy-files">Copy</button>
 
-      <br><br>
-      <div id="progress-container">
-        <div>
-          <span id="progress-text"></span>
-          <div id="loader"></div>
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+  <title>Copy App</title>
+</head>
+
+<body>
+  <div class="main">
+    <div class="select-folder-container">
+      <div class="copy-photos">
+        <span>Copy from</span>
+        <button type="button" id="select-folder">Select folder</button>
+      </div>
+      <div class="selected-folder-container">
+        <span class="selected-folder" id="selected-folder"></span>
+      </div>
+    </div>
+
+    <div class="date-from-and-to">
+      <div class="start-date">
+        <label for="start-date">From</label>
+        <input type="date" id="start-date">
+      </div>
+      <div class="end-date">
+        <label for="end-date">To</label>
+        <input type="date" id="end-date">
+      </div>
+    </div>
+    <div class="footer">
+      <div>
+        <button type="button" id="copy-files">Copy</button>
+        <div id="progress-container">
+          <div>
+            <span id="progress-text"></span>
+            <div id="loader"></div>
+          </div>
         </div>
-    </div>    
-    
-    <script src="renderer.js"></script>
-  </body>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+
 </html>

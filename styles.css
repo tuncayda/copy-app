@@ -137,9 +137,11 @@ input, button {
 }
 
 #loader {
-    border: 8px solid #d5d5d5;
+    border: 8px solid #c4b5e6;
+    /* border: 8px solid #d5d5d5; */
     border-radius: 50%;
-    border-top: 8px solid #2d2d2d;
+    border-top: 8px solid #5200FF;
+    /* border-top: 8px solid #2d2d2d; */
     width: 14px;
     height: 14px;
     -webkit-animation: spin 2s linear infinite; /* Safari */
@@ -208,6 +210,29 @@ input::-webkit-calendar-picker-indicator:hover {
 .end-date > * {
     margin-bottom: 8px;
 }
+
+.footer {
+    position: absolute;
+    bottom: 20px;
+}
+
+.footer > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#copy-files {
+    background-color: #5200FF;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+#copy-files:hover {
+    background-color: #3706a1;
+}
+
   /* Safari */
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
