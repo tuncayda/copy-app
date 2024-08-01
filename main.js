@@ -6,15 +6,23 @@ const os = require('os');
 
 async function saveLastUsedDirectory(directory) {
   try {
-    fs.writeFile('lastDirectory.txt', directory, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
+    await fsp.writeFile(path.join(app.getPath('userData'), 'lastDirectory.txt'), directory);
   } catch (err) {
     console.error('Error saving last used directory:', err);
   }
 }
+
+// async function saveLastUsedDirectory(directory) {
+//   try {
+//     fs.writeFile('lastDirectory.txt', directory, err => {
+//       if (err) {
+//         console.log(err);
+//       }
+//     });
+//   } catch (err) {
+//     console.error('Error saving last used directory:', err);
+//   }
+// }
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -26,6 +34,7 @@ function createWindow() {
       enableRemoteModule: false,
       nodeIntegration: false,
     },
+    icon: path.join(__dirname, 'assets', 'icon.png')
   });
 
   mainWindow.loadFile('index.html');

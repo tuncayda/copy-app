@@ -17,6 +17,8 @@
       "main.js",
       "index.html",
       "preload.js",
+      "styles.css",
+      "renderer.js",
       "lastDirectory.txt" 
     ],
     "directories": {
@@ -24,15 +26,15 @@
     },
     "win": {
       "target": "nsis",
-      "icon": "build/icon.ico"
+      "icon": "assets/icon.png"
     },
     "mac": {
       "target": "dmg",
-      "icon": "build/icon.icns"
+      "icon": "assets/icon.png"
     },
     "linux": {
       "target": "AppImage",
-      "icon": "build"
+      "icon": "assets/icon.png"
     }
   }
 }
