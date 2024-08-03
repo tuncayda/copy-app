@@ -3,14 +3,18 @@ const path = require('path');
 const fs = require('fs');
 const fsp = fs.promises;
 const os = require('os');
-const { format, parseISO, isWithinInterval, startOfDay, endOfDay, isBefore, isAfter } = require('date-fns');
+const { isWithinInterval, startOfDay, endOfDay,} = require('date-fns');
+const storage = require('node-persist');
 
-async function saveLastUsedDirectory(directory) {
-  try {
-    await fsp.writeFile(path.join(app.getPath('userData'), 'lastDirectory.txt'), directory);
-  } catch (err) {
-    console.error('Error saving last used directory:', err);
-  }
+storage.initSync();
+
+async function setLastDirectory(directory) {
+  await storage.setItem('lastDir', directory);
+}
+
+async function getLastDirectory() {
+  const lastDirectory = await storage.getItem('lastDir');
+  return lastDirectory || null;
 }
 
 function createWindow() {
@@ -37,20 +41,25 @@ app.whenReady().then(() => {
       properties: ['openDirectory'],
     });
     selectedDir = result.filePaths[0];
-    saveLastUsedDirectory(selectedDir);
+    setLastDirectory(selectedDir);
 
     return selectedDir;
   });
 
-  ipcMain.handle('get-last-directory', () => {
+  ipcMain.handle('get-last-directory', async () => {
     try {
-      if (fs.existsSync('lastDirectory.txt')) {
-        return fs.readFileSync('lastDirectory.txt', 'utf8').trim();
+      let lastDir = getLastDirectory();
+      if (lastDir) {
+        return lastDir;
       }
     } catch (err) {
       console.error('Error reading last directory:', err);
     }
     return null; // Return null if there's no file or an error occurs
+  });
+
+  ipcMain.handle('set-last-directory', async (event, directory) => {
+    await storage.setItem('lastDir', directory);
   });
 
   ipcMain.handle('files:copyJpg', async (event, sourcePath, startDate, endDate) => {

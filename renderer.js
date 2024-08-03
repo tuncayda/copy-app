@@ -11,7 +11,6 @@ function setTodayDate() {
   document.getElementById('end-date').value = today;
   state.startDate = new Date(today);
   state.endDate = new Date(today );
-  
 }
 
 //Init the last directory and set todays date
