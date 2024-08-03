@@ -14,12 +14,12 @@
     "appId": "com.copy-app",
     "productName": "Copy App",
     "files": [
+      "lastDirectory.txt",
       "main.js",
       "index.html",
       "preload.js",
       "styles.css",
-      "renderer.js",
-      "lastDirectory.txt" 
+      "renderer.js"
     ],
     "directories": {
       "buildResources": "build"
@@ -36,5 +36,8 @@
       "target": "AppImage",
       "icon": "assets/icon.png"
     }
+  },
+  "dependencies": {
+    "date-fns": "^3.6.0"
   }
 }
