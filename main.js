@@ -55,8 +55,12 @@ app.whenReady().then(() => {
 
   ipcMain.handle('files:copyJpg', async (event, sourcePath, startDate, endDate) => {
     try {
-      const start = startOfDay(parseISO(startDate));
-      const end = endOfDay(parseISO(endDate)); 
+      // const start = new Date(startDate);
+      // const end = new Date(endDate);
+      // const start = new Date(startDate + 'T00:00:00.001Z');
+      // const end = Date(endDate + 'T23:59:59.999Z');
+      const start = startOfDay(startDate);
+      const end = endOfDay(endDate); 
 
       const today = new Date().toISOString().split('T')[0];
       const desktopPath = path.join(os.homedir(), 'Desktop');
@@ -71,9 +75,12 @@ app.whenReady().then(() => {
           const stats = await fsp.stat(sourceFile);
           const fileModifiedDate = new Date(stats.mtime);
           if (isWithinInterval(fileModifiedDate, { start, end })) {
+            console.log(`FMD: ${fileModifiedDate}\n\nStart: ${start}\n\nEnd: ${end}`)
+          console.log(fileModifiedDate < end)
             const targetFile = path.join(targetFolder, file);
             await fsp.copyFile(sourceFile, targetFile);
             numberOfFilesCopied++;
+            // Send progress update
             event.sender.send('copy-progress');
           }
         }

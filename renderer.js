@@ -9,8 +9,8 @@ function setTodayDate() {
   const today = new Date().toISOString().split('T')[0]; // Gets today's date in yyyy-mm-dd format
   document.getElementById('start-date').value = today;
   document.getElementById('end-date').value = today;
-  state.startDate = new Date(today + 'T00:00:00.000Z');
-  state.endDate = new Date(today + 'T23:59:59.999Z');
+  state.startDate = new Date(today);
+  state.endDate = new Date(today );
   
 }
 
