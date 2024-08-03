@@ -1,8 +1,9 @@
-const { app, BrowserWindow, ipcMain, dialog, endOfDay } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const fsp = fs.promises;
 const os = require('os');
+const { format, parseISO, isWithinInterval, startOfDay, endOfDay, isBefore, isAfter } = require('date-fns');
 
 async function saveLastUsedDirectory(directory) {
   try {
@@ -54,8 +55,8 @@ app.whenReady().then(() => {
 
   ipcMain.handle('files:copyJpg', async (event, sourcePath, startDate, endDate) => {
     try {
-      const start = new Date(startDate);
-      const end = new Date(endDate);
+      const start = startOfDay(parseISO(startDate));
+      const end = endOfDay(parseISO(endDate)); 
 
       const today = new Date().toISOString().split('T')[0];
       const desktopPath = path.join(os.homedir(), 'Desktop');
@@ -69,11 +70,10 @@ app.whenReady().then(() => {
           const sourceFile = path.join(sourcePath, file);
           const stats = await fsp.stat(sourceFile);
           const fileModifiedDate = new Date(stats.mtime);
-          if (fileModifiedDate >= start && fileModifiedDate <= end) {
+          if (isWithinInterval(fileModifiedDate, { start, end })) {
             const targetFile = path.join(targetFolder, file);
             await fsp.copyFile(sourceFile, targetFile);
             numberOfFilesCopied++;
-            // Send progress update
             event.sender.send('copy-progress');
           }
         }
