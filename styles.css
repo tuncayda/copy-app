@@ -1,16 +1,84 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -20,8 +88,17 @@ time, mark, audio, video {
 }
 
 
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
@@ -29,16 +106,20 @@ body {
   line-height: 1;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
   content: '';
   content: none;
 }
@@ -48,7 +129,10 @@ table {
   border-spacing: 0;
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
@@ -68,178 +152,235 @@ button {
 }
 
 textarea {
-  resize: vertical; 
+  resize: vertical;
 }
 
-button:disabled, input:disabled {
+button:disabled,
+input:disabled {
   cursor: default;
 }
 
 
 body {
-    background-color: #101214;
-    color: white;
-    font-family: sans-serif;
+  background-color: #101214;
+  color: white;
+  font-family: sans-serif;
 }
 
 .header {
-    background-color: #0C0D0F;
-    min-height: 40px;
-    border-bottom: 1px solid #2C2C2C;
-    display: flex;
-    align-items: center;
-    color: #868686;
-    font-size: 14px;
+  background-color: #0C0D0F;
+  min-height: 40px;
+  border-bottom: 1px solid #2C2C2C;
+  display: flex;
+  align-items: center;
+  color: #868686;
+  font-size: 14px;
 }
 
-.header > h1 {
-    font-weight: bold;
+.header>h1 {
+  font-weight: bold;
 }
 
 .main {
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .date-from-and-to {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-.date-from-and-to > div {
-    margin-right: 20px;
+.date-from-and-to>div {
+  margin-right: 20px;
 }
 
-input, button {
-    background-color: #232425;
-    color: white;
-    box-shadow: none;
-    outline: none;
-    color-scheme: dark;
-    padding: 12px;
-    border-radius: 4px;
-    border: 1px solid #2e2f30;
+input,
+button {
+  background-color: #232425;
+  color: white;
+  box-shadow: none;
+  outline: none;
+  color-scheme: dark;
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #2e2f30;
 }
-   
+
 
 #progress-container {
-    display: none;
+  display: none;
 }
 
-#progress-container > div {
-    display: flex;
-    align-items: center;
+#progress-container>div {
+  display: flex;
+  align-items: center;
 }
 
-#progress-container > div > *:first-child {
-    margin-right: 12px;
+#progress-container>div>*:first-child {
+  margin-right: 12px;
 }
 
 #loader {
-    border: 8px solid #c4b5e6;
-    /* border: 8px solid #d5d5d5; */
-    border-radius: 50%;
-    border-top: 8px solid #5200FF;
-    /* border-top: 8px solid #2d2d2d; */
-    width: 14px;
-    height: 14px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 2s linear infinite;
-  }
-
-body {
-    background-color: #101010;
-    color: #FFFFFF;
-    font-family: sans-serif;
-    font-size: 14px;
+  border: 8px solid #c4b5e6;
+  /* border: 8px solid #d5d5d5; */
+  border-radius: 50%;
+  border-top: 8px solid #5200FF;
+  /* border-top: 8px solid #2d2d2d; */
+  width: 14px;
+  height: 14px;
+  -webkit-animation: spin 2s linear infinite;
+  /* Safari */
+  animation: spin 2s linear infinite;
 }
 
-button, input {
-    background-color: #1B1B1C;
-    border: 1px solid #262626;
-    padding: 8px;
-    color: #FFFFFF;
-    color-scheme: dark;
+body {
+  background-color: #101010;
+  color: #FFFFFF;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+button,
+input {
+  background-color: #1B1B1C;
+  border: 1px solid #262626;
+  padding: 8px;
+  color: #FFFFFF;
+  color-scheme: dark;
 }
 
 button:hover {
-    cursor: pointer;
-    background-color: #232325;
+  cursor: pointer;
+  background-color: #232325;
 }
 
 input::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-  }
-input::-webkit-calendar-picker-indicator:hover {
-    cursor: pointer;
-    background-color: #363639;
-  }
-
-.copy-photos {
-    display: flex;
-    flex-direction: column;
+  cursor: pointer;
 }
 
-.copy-photos > * {
-    margin-bottom: 8px;
+input::-webkit-calendar-picker-indicator:hover {
+  cursor: pointer;
+  background-color: #363639;
+}
+
+.copy-photos {
+  display: flex;
+  flex-direction: column;
+}
+
+.copy-photos>* {
+  margin-bottom: 8px;
 }
 
 .selected-folder {
-    color: #605F64;
+  color: #605F64;
 }
 
 .select-folder-container {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .start-date {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-.start-date > * {
-    margin-bottom: 8px;
+.start-date>* {
+  margin-bottom: 8px;
 }
 
 .end-date {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-.end-date > * {
-    margin-bottom: 8px;
+.end-date>* {
+  margin-bottom: 8px;
 }
 
 .footer {
-    position: absolute;
-    bottom: 20px;
+  position: absolute;
+  bottom: 20px;
 }
 
-.footer > div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.footer>div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/* Add some styles to ensure the checkbox is visible and clickable */
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #5200FF;
+  color: white;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M20.285 6.285c-.34-.34-.89-.34-1.23 0L9 16.34l-4.055-4.055c-.34-.34-.89-.34-1.23 0-.34.34-.34.89 0 1.23l4.64 4.64c.17.17.39.25.615.25s.445-.08.615-.25l10.57-10.57c.34-.34.34-.89 0-1.23z"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.checkbox-group {
+  margin-top: 20px;
+  display: flex;
+}
+
+.checkbox-group > div {
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.checkbox-group > div:hover {
+  cursor: pointer;
+}
+
+.checkbox-group > div > *{
+  cursor: pointer;
+  margin-right: 6px;
+  background-color: #232325;
+}
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 #copy-files {
-    background-color: #5200FF;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-right: 20px;
+  background-color: #5200FF;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: 20px;
 }
 
 #copy-files:hover {
-    background-color: #3706a1;
+  background-color: #3706a1;
 }
 
-  /* Safari */
+/* Safari */
 @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
   }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+
+  100% {
+    -webkit-transform: rotate(360deg);
   }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -67,3 +67,9 @@ document.getElementById('copy-files').addEventListener('click', async () => {
   const { sourcePath, startDate, endDate } = state;
   const result = await window.electron.copyJpgFiles(sourcePath, startDate, endDate);
 });
+
+const checkbox = document.getElementById('myCheckbox');
+
+checkbox.addEventListener('change', () => {
+  console.log(`Checkbox is now ${checkbox.checked ? 'checked' : 'unchecked'}`);
+});
