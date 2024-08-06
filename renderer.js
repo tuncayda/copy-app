@@ -68,8 +68,14 @@ document.getElementById('copy-files').addEventListener('click', async () => {
   const result = await window.electron.copyJpgFiles(sourcePath, startDate, endDate);
 });
 
-const checkbox = document.getElementById('myCheckbox');
+document.getElementById('media-photos').addEventListener('click', async (event) => {
+  await window.electron.setPhotos(event.srcElement.checked);
+});
 
-checkbox.addEventListener('change', () => {
-  console.log(`Checkbox is now ${checkbox.checked ? 'checked' : 'unchecked'}`);
+document.getElementById('media-videos').addEventListener('click', async (event) => {
+  await window.electron.setVideos(event.srcElement.checked);
+});
+
+document.getElementById('media-raw').addEventListener('click', async (event) => {
+  await window.electron.setRaw(event.srcElement.checked);
 });

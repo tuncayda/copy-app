@@ -344,7 +344,11 @@ input[type="checkbox"]:checked {
 .checkbox-group > div > *{
   cursor: pointer;
   margin-right: 6px;
-  background-color: #232325;
+}
+
+.checkbox-group > div > label:hover {
+  color: #605F64;
+  background-color: transparent;
 }
 
 .prevent-select {

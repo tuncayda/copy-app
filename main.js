@@ -8,6 +8,40 @@ const storage = require('node-persist');
 
 storage.initSync();
 
+function isTypePhoto(file) {
+  const photoExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp', '.heic', '.heif'];
+  const extension = path.extname(file).toLowerCase();
+  return photoExtensions.includes(extension);
+}
+
+function isTypeVideo(file) {
+  const videoExtensions = ['.mp4', '.mkv', '.avi', '.mov', '.flv', '.wmv', '.webm', '.mpeg', '.mpg'];
+  const extension = path.extname(file).toLowerCase();
+  return videoExtensions.includes(extension);
+}
+
+function isTypeRaw(file) {
+  const rawExtensions = ['.raw'];
+  const extension = path.extname(file).toLowerCase();
+  return rawExtensions.includes(extension);
+}
+
+function checkMediaType(file, isPhotoEnabled, isVideoEnabled, isRawEnabled) {
+  let isMatch = false;
+  if (isPhotoEnabled && isTypePhoto(file)) {
+    return true;
+  }
+  
+  if (isVideoEnabled && isTypeVideo(file)) {
+    return true;
+  }
+  
+  if (isRawEnabled && isTypeRaw(file)) {
+    return true;
+  }
+}
+
+
 async function setLastDirectory(directory) {
   await storage.setItem('lastDir', directory);
 }
@@ -62,10 +96,25 @@ app.whenReady().then(() => {
     await storage.setItem('lastDir', directory);
   });
 
+  ipcMain.handle('set-photos', async (event, val) => {
+    await storage.setItem('photos', val);
+  });
+  
+  ipcMain.handle('set-videos', async (event, val) => {
+    await storage.setItem('videos', val);
+  });
+  
+  ipcMain.handle('set-raw', async (event, val) => {
+    await storage.setItem('raw', val);
+  });
+
   ipcMain.handle('files:copyJpg', async (event, sourcePath, startDate, endDate) => {
     try {
       const start = startOfDay(startDate);
       const end = endOfDay(endDate); 
+      const isPhotoEnabled = await storage.get('photos');
+      const isVideoEnabled = await storage.get('videos');
+      const isRawEnabled = await storage.get('raw');
 
       const today = new Date().toISOString().split('T')[0];
       const desktopPath = path.join(os.homedir(), 'Desktop');
@@ -75,7 +124,7 @@ app.whenReady().then(() => {
       const files = await fsp.readdir(sourcePath);
       let numberOfFilesCopied = 0;
       for (const file of files) {
-        if (path.extname(file).toLowerCase() === '.jpg') {
+        if (checkMediaType(file, isPhotoEnabled, isVideoEnabled, isRawEnabled)) {
           const sourceFile = path.join(sourcePath, file);
           const stats = await fsp.stat(sourceFile);
           const fileModifiedDate = new Date(stats.mtime);
