@@ -144,6 +144,9 @@ app.whenReady().then(() => {
       event.sender.send('copy-progress-finished', {
         files: numberOfFilesCopied
       });
+      if(numberOfFilesCopied == '0') {
+        event.sender.send('no-files-copied');
+      }
       return { success: true, message: 'Files copied successfully!' };
     } catch (error) {
       console.error('Error copying files:', error);

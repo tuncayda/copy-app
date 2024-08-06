@@ -45,6 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
     progressText.innerText = `Copied ${files} files`;
     document.getElementById('loader').style.display = 'none';
   });
+
+  window.electron.on('no-files-copied', () => {
+    progressText.innerText = 'No files copied. Check the folder, dates or media types';
+    progressContainer.style.display = 'block';
+  }); 
 });
 
 document.getElementById('select-folder').addEventListener('click', async () => {
