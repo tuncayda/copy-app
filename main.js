@@ -6,6 +6,10 @@ const os = require('os');
 const { isWithinInterval, startOfDay, endOfDay,} = require('date-fns');
 const storage = require('node-persist');
 
+let isPhotoEnabled = false;
+let isVideoEnabled = false;
+let isRawEnabled = false;
+
 storage.initSync();
 
 function isTypePhoto(file) {
@@ -26,7 +30,7 @@ function isTypeRaw(file) {
   return rawExtensions.includes(extension);
 }
 
-function checkMediaType(file, isPhotoEnabled, isVideoEnabled, isRawEnabled) {
+function checkMediaType(file) {
   let isMatch = false;
   if (isPhotoEnabled && isTypePhoto(file)) {
     return true;
@@ -96,16 +100,16 @@ app.whenReady().then(() => {
     await storage.setItem('lastDir', directory);
   });
 
-  ipcMain.handle('set-photos', async (event, val) => {
-    await storage.setItem('photos', val);
+  ipcMain.handle('set-photos', (event, val) => {
+    isPhotoEnabled = val;
   });
   
   ipcMain.handle('set-videos', async (event, val) => {
-    await storage.setItem('videos', val);
+    isVideoEnabled = val;
   });
   
   ipcMain.handle('set-raw', async (event, val) => {
-    await storage.setItem('raw', val);
+    isRawEnabled = val;
   });
 
   ipcMain.handle('files:copyJpg', async (event, sourcePath, startDate, endDate) => {
